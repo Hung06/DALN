@@ -1,0 +1,111 @@
+
+:root{
+    --cam: #F8843D;
+    --light-blue:#3c5398;
+    --dask-blue: #223771;
+    --light-gray: #f0f3fd;
+}
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+.flexs{
+    display: flex;
+    justify-content: space-between;
+}
+.left-sidebar{
+    width: 13%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.sidebar-menu{
+    position: absolute;
+    top: 15%;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    justify-content: space-between;
+}
+.menu-item:hover{
+    color: var(--cam);
+}
+.content-page{
+    width: 87%;
+    display: flex;
+    flex-direction: column;
+}
+.content-top{
+    width: 100%;
+    height: 6%;
+    display: flex;
+
+}
+.content-bottom{
+    background-color:white;
+    height: 94%;
+}
+.search{
+    margin-left: auto;
+    position: relative;
+    width: 480px;
+    margin-right: 30px;
+}
+.search i{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+} 
+.search-form{
+    width: 100%;
+    display: block;
+    height: 35px;
+    background-color: var(--light-blue);
+    border: solid 1px var(--light-blue);
+    border-radius: 100px;
+    color: white;   
+    padding-left: 20px;
+    padding-right: 50px;
+    margin-top: 10px;
+}
+.acc{
+    display: flex;
+    font-size: 20px;
+    justify-content: space-around;
+    width: 250px;
+    color: white;
+    align-items: center;
+    position: relative;
+}
+.acc i:hover{
+    color: var(--cam);
+}
+.acc-dow{
+    cursor: pointer;
+}
+.acc-dow:hover{
+    color: var(--cam);
+}
+.user-drop{
+    position: absolute;
+    display: none;
+    width: 200px;
+    height: 40px;
+    background-color: var(--dask-blue);
+    top: 56px;
+    list-style: none;
+    right: 0px;
+    cursor: pointer;
+    border: 0px solid var(--dask-blue);
+    border-radius: 0 0 10px 10px;
+}
+.user-drop:hover{
+    color: var(--cam);
+}
+.content-bottom{
+    background: linear-gradient(to right, var(--light-gray), var(--light-blue));
+    border-radius: 20px;
+}

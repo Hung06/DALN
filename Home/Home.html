@@ -8,10 +8,63 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bootstrap/js/bootstrap.min.js">
     <link rel="stylesheet" href="/fontawesome-free-6.4.2-web/css/all.min.css">
+    <link rel="stylesheet" href="Home.css">
+    <script src="Home.js"></script>
+
 </head>
 <body>
-    <div class="wrapper wrapper-login">
-        
+    <div class="wrapper wrapper-login flexs">
+        <div class="left-sidebar">
+            <div class="sidebar-menu">
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Trang chủ</span>
+                </a>
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-star"></i>
+                    <span>Sự kiện</span>
+                </a>
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Tạo CLB</span>
+                </a>
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-school"></i>
+                    <span>Tạo sự kiện</span>
+                </a>
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Thông báo</span>
+                </a>
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Thống kê</span>
+                </a>    
+            </div>
+        </div>
+        <div class="content-page">
+            <div class="content-top">
+                <div class="search">
+                    <form action="">
+                        <input type="text" placeholder="Tìm kiếm" class="search-form"> 
+                    </form>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="acc">
+                    <i class="fa-solid fa-circle-user" style="font-size: 40px;"></i>
+                    <div class="acc-dow">
+                        <span>Nguyen phi hung</span>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                    <ul class="user-drop" data-bs-popper="none">
+                        <li><a class="dropdown-item" id="btnLogout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-bottom">
+
+            </div>
+        </div>
     </div>
 </body>
 </html>
