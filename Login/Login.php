@@ -21,7 +21,7 @@ if (isset($_POST['login']) && $_POST['login']) {
     $pass = mysqli_real_escape_string($connection, $pass);
 
     // Sử dụng prepared statement để ngăn chặn SQL injection
-    $query = "SELECT * FROM tbl_acc WHERE Mail = ? AND Pass = ?";
+    $query = "SELECT * FROM user WHERE Mail = ? AND Pass = ?";
     $stmt = $connection->prepare($query);
 
     // Bind parameters
@@ -34,11 +34,12 @@ if (isset($_POST['login']) && $_POST['login']) {
     $result = $stmt->get_result();
 
     // Kiểm tra xem có dòng dữ liệu trả về hay không
-    if ($result->fetch_assoc()) {
+    if ($row = $result->fetch_assoc()) {
         // Xác thực thành công
         // Lưu thông tin người dùng vào session
         $_SESSION['user'] = $user;
-        // $_SESSION['role'] = ...; // Bạn có thể lưu Role vào session nếu cần
+        $_SESSION['Name'] = $row['Name']; // Store the user's name in the session
+        $_SESSION['Role'] = $row['Role']; // Store the user's role in the session
 
         // Chuyển hướng đến trang Home.php
         header("Location: ../Home/Home.php");
@@ -52,6 +53,7 @@ if (isset($_POST['login']) && $_POST['login']) {
     $stmt->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

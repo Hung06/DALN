@@ -109,3 +109,69 @@ a{
     background: linear-gradient(to right, var(--light-gray), var(--light-blue));
     border-radius: 20px;
 }
+.content-bottom{
+    display: flex;
+    flex-wrap: wrap;
+}
+.CLB-item{
+    width: 250px;
+    height: 300px;
+    background-color: var(--dask-blue);
+    position: relative;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 40px 30px;
+    display: flex;
+    justify-content: center;
+    border: #0f0f0f solid 1px;
+}
+
+
+.CLB-itme-img img{
+    width: 180px;
+    height: 80%;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.CLB-item span{
+    position: absolute;
+    color: white;
+    bottom: 0px;
+    font-weight: bold;
+}
+.CLB-item:hover span{   
+    color: var(--cam);
+}
+#pagination-container{
+    display: flex;
+    justify-content: center;
+}
+
+#pagination-container a{
+    margin: 0 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+#pagination-container a:hover{
+    color: var(--cam);
+}
+
+
+
+/* DK vs Delete */
+.DK{
+    width: 100px;
+    height: 40px;
+    background-color: var(--light-blue);
+    position: absolute;
+    bottom: -45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: white;
+    border: 1px solid #3c5398;
+}
+.DK:hover{
+    background-color:var(--cam) ;
+}

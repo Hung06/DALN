@@ -79,5 +79,16 @@ class Database {
             return false;
         }
     }
+    public function count($table) {
+        $sql = "SELECT COUNT(*) as count FROM $table";
+        $result = $this->link->query($sql);
+        
+        if ($result) {
+            $row = $result->fetch_assoc();
+            return $row['count'];
+        } else {
+            return 0;
+        }
+    }
 }
 ?>
