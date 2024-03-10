@@ -4,86 +4,6 @@
             userDrop.style.display = (userDrop.style.display === 'block') ? 'none' : 'block';
         });
     });
-    const itemsPerPage = 10; // Số lượng phần tử trên mỗi trang
-    let currentPage = 1; // Trang hiện tại
-    
-    function generateData() {
-      // Tạo mảng dữ liệu giả định
-      const CLBData = Array.from({ length: 50 }, (_, index) => ({
-        name: `CLB${index + 1}`,
-        image: `/img/avt${index + 1}.jpg`,
-      }));
-    
-      return CLBData;
-    }
-    
-    function displayCLBData() {
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
-      const currentCLBData = CLBData.slice(startIndex, endIndex);
-  
-      const contentBottom = document.querySelector('.content-bottom');
-      
-      updatePagination();
-  }
-  
-    
-    function createCLBItem(clb) {
-      return `
-        <div class="CLB-item">
-          <div class="CLB-itme-img">
-            <img src="${clb.image}" alt="">
-          </div>
-          <span>${clb.name}</span>
-        </div>
-      `;
-    }
-    
-    function updatePagination() {
-      const totalPages = Math.ceil(CLBData.length / itemsPerPage);
-      const paginationContainer = document.getElementById('pagination-container');
-    
-      highlightCurrentPageButton();
-    }
-    
-    function generatePaginationButtons(totalPages) {
-      let buttonsHtml = '';
-    
-      for (let i = 1; i <= totalPages; i++) {
-        buttonsHtml += `<button onclick="changePage(${i})">${i}</button>`;
-      }
-    
-      return buttonsHtml;
-    }
-    
-    function changePage(pageNumber) {
-      currentPage = pageNumber;
-      displayCLBData();
-    }
-    
-    function highlightCurrentPageButton() {
-      const buttons = document.querySelectorAll('#pagination-container button');
-      buttons.forEach((button, index) => {
-        button.classList.toggle('active', index + 1 === currentPage);
-      });
-    }
-    
-    // Gọi hàm hiển thị dữ liệu khi trang được tải
-    const CLBData = generateData();
-    displayCLBData();
-    
-      
-    function highlightCurrentPageButton() {
-      const buttons = document.querySelectorAll('#pagination-container button');
-      buttons.forEach((button, index) => {
-        button.classList.toggle('active', index + 1 === currentPage);
-      });
-    }
-      
-      // Gọi hàm hiển thị dữ liệu khi trang được tải
-    displayCLBData();
-    
-
 
       // Timf kieems
     document.addEventListener('DOMContentLoaded', function() {
@@ -113,7 +33,25 @@
           }
       }
   });
-  
+  function showClubTable() {
+    var clubTable = document.getElementById("table-club");
+    var eventTable = document.getElementById("table-event");
+
+    clubTable.style.display = "table";
+    eventTable.style.display = "none";
+}
+
+// Định nghĩa hàm showEventTable
+function showEventTable() {
+    var clubTable = document.getElementById("table-club");
+    var eventTable = document.getElementById("table-event");
+
+    clubTable.style.display = "none";
+    eventTable.style.display = "table";
+}
+
+
+
   
   
     

@@ -1,0 +1,74 @@
+
+:root{
+    --cam: #F8843D;
+    --light-blue:#3c5398;
+    --dask-blue: #223771;
+    --light-gray: #f0f3fd;
+}
+.content-bottom1{
+    background: linear-gradient(to right, var(--light-gray), var(--light-blue));
+    border-radius: 20px;
+    height: 94%;
+}
+.actions{
+    width: 300px;
+    height: 60px;
+    margin:20px 0;
+    display: flex;
+    justify-content: space-around;
+}
+.clb,.sk{
+    background-color: var(--dask-blue);
+    color: white;
+    border-radius: 20px;
+    width: 140px;
+}
+.clb:hover,.sk:hover{
+    background-color: var(--cam);
+    color: white;
+}
+.table-club{
+    width: 100%;
+    
+}
+.table-title{
+    text-align: center;
+}
+th,td{
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.small{
+    width: 5%;
+}
+.fit{
+    width: 15%;
+}
+.big{
+    width: 30%;
+}
+.row-avt{
+   width: 100%;
+}
+.row-bgr{
+    width: 100%;
+}
+.btn{
+    display: flex;
+
+}
+.Delete,.Pass{
+    background-color:var(--dask-blue);
+    color: white;  
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.Delete:hover{
+    background-color: red;
+    color: white;
+}
+.Pass:hover{
+    background-color: var(--cam);
+    color: white;
+}

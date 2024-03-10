@@ -90,5 +90,66 @@ class Database {
             return 0;
         }
     }
+    // Insert data using prepared statement
+public function insertPrepared($query, $params = []) {
+    $stmt = $this->link->prepare($query);
+    if ($stmt) {
+        // Bind parameters
+        if ($params) {
+            $stmt->bind_param(str_repeat('s', count($params)), ...$params);
+        }
+        // Execute statement
+        $insert_row = $stmt->execute();
+        if ($insert_row) {
+            return $insert_row;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+// Update data using prepared statement
+public function updatePrepared($query, $params = []) {
+    $stmt = $this->link->prepare($query);
+    if ($stmt) {
+        // Bind parameters
+        if ($params) {
+            $stmt->bind_param(str_repeat('s', count($params)), ...$params);
+        }
+        // Execute statement
+        $update_row = $stmt->execute();
+        if ($update_row) {
+            return $update_row;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+// Delete data using prepared statement
+public function deletePrepared($query, $params = []) {
+    $stmt = $this->link->prepare($query);
+    if ($stmt) {
+        // Bind parameters
+        if ($params) {
+            $stmt->bind_param(str_repeat('s', count($params)), ...$params);
+        }
+        // Execute statement
+        $delete_row = $stmt->execute();
+        if ($delete_row) {
+            return $delete_row;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+
 }
 ?>

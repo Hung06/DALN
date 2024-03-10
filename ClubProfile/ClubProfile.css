@@ -1,0 +1,288 @@
+.wrapper-login {
+    height: 100vh; /* Set chiều cao của wrapper-login bằng 100% chiều cao của cửa sổ trình duyệt */
+    display: flex;
+}
+.content-page {
+    flex-grow: 1; /* Cho phần content-page mở rộng để chiếm hết không gian còn lại *//* Cho phần content-page mở rộng để chiếm hết không gian còn lại */
+}
+.content-top{
+    margin-bottom: 2%;
+}
+.content-bottom {
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    height: 1100px;
+}
+.avt-c {
+    height: 350px;
+    width: 100%;
+    position: relative;
+}
+.cover-art img {
+    width: 100%; /* Đảm bảo ảnh đầy đủ chiều rộng trong phần avt-c */
+    
+    max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước của khung chứa */
+    max-height: 100%; /* Đảm bảo ảnh không vượt quá kích thước của khung chứa */
+    position: absolute; /* Tạo vị trí tuyệt đối trong khung chứa */
+    top: 0; /* Đặt vị trí trên cùng của khung chứa */
+    left: 0; /* Đặt vị trí bên trái của khung chứa */
+    border-top-left-radius: 20px; /* Bo góc trái trên */
+    border-top-right-radius: 20px; /* Bo góc phải trên */
+}
+
+.infomationCLB {
+    width: 100%;
+}
+.infomation{
+    position: relative;
+    display: flex;
+}
+.avatar-container {
+    position: relative; /* Đặt phần tử cha làm phần tử tương đối */
+    display: flex;
+    align-items: center; /* Căn giữa các phần tử con theo chiều ngang */
+}
+.avatar {
+    position: relative;
+    width: 150px; /* Định kích thước cho avatar */
+    height: 150px; /* Định kích thước cho avatar */
+    border-radius: 50%; /* Làm tròn các góc để tạo thành hình tròn */
+    overflow: hidden; /* Ẩn bớt phần nội dung vượt ra ngoài khung của avatar */
+    border: 4px solid #fff;
+    margin-top: -60px;
+    margin-left: 50px;
+}
+.avatar img {
+    width: 100%; /* Đảm bảo ảnh đầy đủ chiều rộng trong khung avatar */
+    height: auto; /* Chiều cao tự động điều chỉnh theo tỷ lệ */
+    position: absolute;
+}
+.edit-button1 {
+    position: absolute; /* Đặt nút chỉnh sửa tại vị trí tuyệt đối */
+    border: none; /* Xóa viền của nút */
+    border-radius: 50%; /* Làm tròn góc của nút để tạo hình tròn */
+    width: 40px; /* Định kích thước của nút */
+    height: 40px; /* Định kích thước của nút */
+    display: flex;
+    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+    align-items: center; /* Căn giữa nội dung theo chiều dọc */
+    cursor: pointer; /* Biến con trỏ chuột thành dấu nhấp chuột khi di chuyển qua nút */
+    bottom: 10px; /* Đặt nút chỉnh sửa ở dưới cùng của avatar */
+    right: 10px;
+    
+}
+.edit-button {
+    position: absolute; /* Đặt nút chỉnh sửa tại vị trí tuyệt đối */
+    border: none; /* Xóa viền của nút */
+    border-radius: 50%; /* Làm tròn góc của nút để tạo hình tròn */
+    width: 40px; /* Định kích thước của nút */
+    height: 40px; /* Định kích thước của nút */
+    display: flex;
+    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+    align-items: center; /* Căn giữa nội dung theo chiều dọc */
+    cursor: pointer; /* Biến con trỏ chuột thành dấu nhấp chuột khi di chuyển qua nút */
+    bottom: 0; /* Đặt nút chỉnh sửa ở dưới cùng của avatar */
+    left: 160px;
+}
+
+/* Thêm hover effect khi di chuột qua nút chỉnh sửa */
+.edit-button:hover {
+    background-color: #fff;
+}
+.infomation-item h2{
+    margin-left:20px;
+}
+
+.menuCLB{
+    display: flex;
+}
+.menuleft{
+    flex: 70%;
+    margin-left: 15%;
+}
+.menuright{
+    flex: 30%;
+}
+.menuleft-button button{
+    width: 120px;
+    height: 50px;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    background-color: #223771;
+    line-height: 50px;
+    font-size: 18px;
+}
+
+.menuleft-button button:hover{
+    background-color: #F8843D;
+}
+.buttont{
+    margin-left: 2%;
+}
+.button-active {
+    background-color: #F8843D;
+    
+}
+
+
+
+.content-menu{
+    margin-top:3%;
+    
+    display: none;
+}
+
+
+.scollbar{
+    
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+}
+.content-scollbar .event{
+    border-radius: 10px;
+}
+.content-scollbar .event button {
+    
+    border: none;  
+}
+.content-scollbar .event img{
+    height: 600px;
+    border-radius: 10px;
+}
+.content-scollbar .event .col-right{   
+    border-radius: 10px;
+    height: auto;
+    width: 80%;
+    background-color: RGB(255, 255, 255, 0.5);
+    color: black;
+    margin-right: 12px;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.content-event table thead th {
+    text-align: center; /* Căn giữa nội dung trong thẻ th */
+    height: 100px;
+}
+.content-event table tbody th{
+    height: 50px;
+}
+.content-event table tbody .th1{
+    font-weight: 600;
+    white-space: nowrap;
+}
+.content-event table tbody .th2{
+    font-weight: 400;
+}
+
+.move{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: black;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-top: 30%;
+}
+.move:hover{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.create-event table{
+    background-color: #fff;
+    border-radius: 10px;
+    font-size: 20px;
+}
+.create-event table th{
+    height: 60px;
+    text-align: center;
+}
+
+
+
+.member{
+    background-color: #fff;
+    border-radius: 10px;
+}
+.member table{
+    background-color: #fff;
+    border-radius: 10px;
+
+}
+.member table thead tr{
+    text-align: left; /* Căn giữa nội dung trong thẻ th */
+    height: 60px;
+    border-bottom: 1px solid #D3D3D3;
+}
+.member-t th{
+    height: 50px;
+}
+.member-t button{
+    background-color: #F8843D;
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+}
+.member-t button:hover{
+    background-color: #D3D3D3;
+}
+.member-t .tuchoi{
+    margin-left: 5px;
+}
+.STT{
+    text-align: center;
+}
+input{
+    height: 60px;
+    width: 400px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+textarea{
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    border: 1px solid black;
+
+}
+.btn{
+    background-color: white; 
+    width: 180px;
+    height: 60 px;
+    color: black;
+    border-radius: 10px;
+    border: 1px solid black;
+    left: 700px;
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+}
+.btn:hover{
+    background-color: #F8843D;
+    cursor: pointer;
+    color: white;
+}
+.tb-event{
+    height: 1000px;
+}
+.Delete,.Pass{
+    background-color: var(--dask-blue);
+    color: white;
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.Delete:hover{
+    background-color: red;
+    color: white;
+}
+.Pass:hover{
+    background-color: #F8843D;
+    color: white;
+}

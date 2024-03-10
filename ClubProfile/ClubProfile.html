@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Login/Login.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/js/bootstrap.min.js">
+    <link rel="stylesheet" href="/Home/Home.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.4.2-web/css/all.min.css">
+    <link rel="stylesheet" href="ClubProfile.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> 
+    <title>ClubProfile</title>
+</head>
+<body>
+    <div class="wrapper wrapper-login flexs">
+        <div class="left-sidebar">
+            <div class="sidebar-menu">
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Trang chủ</span>
+                </a>
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-star"></i>
+                    <span>Sự kiện</span>
+                </a>
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Tạo CLB</span>
+                </a>
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-school"></i>
+                    <span>Tạo sự kiện</span>
+                </a>
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Thông báo</span>
+                </a>
+                <a href="" class="menu-item">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Thống kê</span>
+                </a>    
+            </div>
+        </div>
+        <div class="content-page">
+            <div class="content-top">
+                <div class="search">
+                    <form action="">
+                        <input type="text" placeholder="Tìm kiếm" class="search-form"> 
+                    </form>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="acc">
+                    <i class="fa-solid fa-circle-user" style="font-size: 40px;"></i>
+                    <div class="acc-dow">
+        
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                    <ul class="user-drop" data-bs-popper="none">
+                        <li><a class="dropdown-item" id="btnLogout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-bottom">
+                <div class="avt-c">
+                    <div class="cover-art">
+                        <img src="https://i.pinimg.com/originals/21/cc/ee/21cceea574a305a73fac081967cdce80.jpg" alt="" >
+                    </div>
+                    <button class="edit-button1">
+                        <i class="fa-solid fa-camera"></i>
+                    </button>
+                </div>
+                <div class="infomationCLB">
+                    <div class="infomation">
+                        <div class="avatar-container">
+                            <div class="avatar">
+                                <img src="https://i.pinimg.com/564x/f5/8d/49/f58d49835b3a6f1d6a5cd2c992c7cfa5.jpg" alt="">
+                            </div>
+                            <button class="edit-button">
+                                <i class="fa-solid fa-camera"></i> <!-- Sử dụng biểu tượng chỉnh sửa -->
+                            </button>
+                        </div>
+                        <div class="infomation-item">
+                            <h2>Haruno Sakura</h2>
+                        </div>
+                    </div>
+                    <div class="menuCLB">
+                        <div class="menuleft">
+                            <div class="menuleft-button">
+                                <span><button onclick="showPage('event')" data-page-id="event"><span id="event-btn" class="active-button">Sự kiện</span></b></span>
+                                <button onclick="showPage('create-event')" class="buttont" data-page-id="create-event"><span>Tạo sự kiện</span></b>
+                                <button onclick="showPage('member')" class="buttont" data-page-id="member"><span>Thành viên</span></b>
+                                <button onclick="showPage('registration')" class="buttont" data-page-id="registration"><span>Mở đăng ký</span></b>
+                            </div>
+                            <div class="content-button">
+                                <div class="content-menu content-event" style="display: block;" id="event">
+                                    <div class="scollbar">
+                                        <h2>Sự kiện</h2>
+                                    </div>
+                                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner content-scollbar">
+
+                                            <div class="carousel-item event active">
+                                                <div class="row">
+                                                    <!-- Phần trái, chứa ảnh -->
+                                                    <div class="col">
+                                                        <img src="https://i.pinimg.com/736x/24/8e/9e/248e9e44108c737cb59252a2d5dcc9e0.jpg" class="d-block w-100" alt="...">
+                                                    </div>
+                                                    <!-- Phần phải, chứa nội dung -->
+                                                    <div class="col col-right">
+                                                        <div>
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2"><h4>Sự kiện mùa xuân 2024</h4></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th class="th1">Câu lạc bộ</th>
+                                                                        <th class="th2">Haruno Sakura</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Thời gian</th>
+                                                                        <th class="th2">20/01/2024</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Địa điểm</th>
+                                                                        <th class="th2">Đại học PHenikaa</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Người tham gia</th>
+                                                                        <th class="th2">30</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Trạng thái</th>
+                                                                        <th class="th2">Đóng</th>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item event">
+                                                <div class="row">
+                                                    <!-- Phần trái, chứa ảnh -->
+                                                    <div class="col">
+                                                        <img src="https://i.pinimg.com/564x/68/45/fc/6845fcc0cf2fe210ad2063abc76ac201.jpg" class="d-block w-100" alt="...">
+                                                    </div>
+                                                    <!-- Phần phải, chứa nội dung -->
+                                                    <div class="col col-right">
+                                                        <div>
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2"><h4>Sự kiện mùa hạ 2024</h4></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th class="th1">Câu lạc bộ</th>
+                                                                        <th class="th2">Haruno Sakura</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Thời gian</th>
+                                                                        <th class="th2">20/05/2024</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Địa điểm</th>
+                                                                        <th class="th2">Đại học PHenikaa</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Người tham gia</th>
+                                                                        <th class="th2">11</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Trạng thái</th>
+                                                                        <th class="th2">Mở</th>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item event">
+                                                <div class="row">
+                                                    <!-- Phần trái, chứa ảnh -->
+                                                    <div class="col">
+                                                        <img src="https://i.pinimg.com/736x/f2/6c/1d/f26c1d1d54513a7491eb49869e1e75a6.jpg" class="d-block w-100" alt="...">
+                                                    </div>
+                                                    <!-- Phần phải, chứa nội dung -->
+                                                    <div class="col col-right">
+                                                        <div>
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2"><h4>Sự kiện mùa thu 2024</h4></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th class="th1">Câu lạc bộ</th>
+                                                                        <th class="th2">Haruno Sakura</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Thời gian</th>
+                                                                        <th class="th2">20/08/2024</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Địa điểm</th>
+                                                                        <th class="th2">Đại học PHenikaa</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Người tham gia</th>
+                                                                        <th class="th2">16</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Trạng thái</th>
+                                                                        <th class="th2">Mở</th>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item event">
+                                                <div class="row">
+                                                    <!-- Phần trái, chứa ảnh -->
+                                                    <div class="col">
+                                                        <img src="https://i.pinimg.com/564x/bf/ec/b2/bfecb2e9043142d64600d9d760b7052f.jpg" class="d-block w-100" alt="...">
+                                                    </div>
+                                                    <!-- Phần phải, chứa nội dung -->
+                                                    <div class="col col-right">
+                                                        <div>
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2"><h4>Sự kiện mùa đông 2024</h4></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th class="th1">Câu lạc bộ</th>
+                                                                        <th class="th2">Haruno Sakura</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Thời gian</th>
+                                                                        <th class="th2">20/12/2024</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Địa điểm</th>
+                                                                        <th class="th2">Đại học PHenikaa</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Người tham gia</th>
+                                                                        <th class="th2">15</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="th1">Trạng thái</th>
+                                                                        <th class="th2">Mở</th>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="carousel-control-prev move" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next move" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>                                    
+                                </div>
+                                <div class="content-menu" id="create-event">
+                                    <div class="create-event member">
+                                        <table>
+                                           <tr>
+                                                <th>
+                                                    Tên sự kiện
+                                                </th>
+                                                <th>
+                                                    <input type="text">
+                                                </th>
+                                           </tr>
+                                           <tr>
+                                                <th>
+                                                    Thời gian
+                                                </th>
+                                                <th>
+                                                    <input type="text">
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Địa điểm
+                                                </th>
+                                                <th>
+                                                    <input type="text">
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Mô tả
+                                                </th>
+                                                <th>
+                                                    <input type="text">
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Ảnh bìa
+                                                </th>
+                                                <th>
+                                                    <button>Chọn tệp</button>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="content-menu" id="member">
+                                    <div class="member">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="STT">ID</th>
+                                                    <th>Mã sinh viên</th>
+                                                    <th>Họ tên</th>
+                                                    <th>Chức vụ</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="member-t">
+                                                    <th class="STT">1</th>
+                                                    <th>21012803</th>
+                                                    <th>Haruno Sakura</th>
+                                                    <th>Chủ nhiệm câu lạc bộ</th>
+                                                    <th></th>
+                                                </tr>
+                                                <tr class="member-t">
+                                                    <th class="STT">2</th>
+                                                    <th>21010289</th>
+                                                    <th>Amaterasu Mizu</th>
+                                                    <th>Thành viên</th>
+                                                    <th><button>Xoá</button></th>
+                                                </tr>
+                                                <tr class="member-t">
+                                                    <th class="STT">3</th>
+                                                    <th>21011411</th>
+                                                    <th>Raijin Deku</th>
+                                                    <th>Thành viên</th>
+                                                    <th><button>Xoá</button></th>
+                                                </tr>
+                                                <tr class="member-t">
+                                                    <th class="STT">4</th>
+                                                    <th>21012307</th>
+                                                    <th>Uchiha Sasuke</th>
+                                                    <th>Thành viên</th>
+                                                    <th><button>Xoá</button></th>
+                                                </tr>
+                                                <tr class="member-t">
+                                                    <th class="STT">5</th>
+                                                    <th>21011010</th>
+                                                    <th>Uzumaki Naruto</th>
+                                                    <th>Thành viên</th>
+                                                    <th><button>Xoá</button></th>
+                                                </tr>
+                                                <tr class="member-t">
+                                                    <th class="STT">5</th>
+                                                    <th>21011010</th>
+                                                    <th>Hyuga Neji</th>
+                                                    <th>Đợi</th>
+                                                    <th><button>Duyệt</button> <button class="tuchoi">Từ chối</button></th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="content-menu" id="registration">
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menuright"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ClubProfile.js"></script>
+</body>
+</html>

@@ -10,6 +10,9 @@ a{
     color: white;
     font-size: 20px;
 }
+body{
+    font-family: 'Roboto', sans-serif;
+}
 .flexs{
     display: flex;
     justify-content: space-between;
@@ -45,7 +48,8 @@ a{
 }
 .content-bottom{
     background-color:white;
-    height: 94%;
+    height: 855px;
+    overflow: auto;
 }
 .search{
     margin-left: auto;
@@ -95,14 +99,18 @@ a{
     width: 200px;
     height: 40px;
     background-color: var(--dask-blue);
-    top: 56px;
+    top: 29px;
     list-style: none;
     right: 0px;
     cursor: pointer;
     border: 0px solid var(--dask-blue);
     border-radius: 0 0 10px 10px;
+    margin: 20px 0;
 }
 .user-drop:hover{
+    color: var(--cam);
+}
+.dropdown-item:hover{
     color: var(--cam);
 }
 .content-bottom{

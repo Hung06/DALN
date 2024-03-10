@@ -40,6 +40,7 @@ if (isset($_POST['login']) && $_POST['login']) {
         $_SESSION['user'] = $user;
         $_SESSION['Name'] = $row['Name']; // Store the user's name in the session
         $_SESSION['Role'] = $row['Role']; // Store the user's role in the session
+        $_SESSION['MSV'] = $row['MSV'];
 
         // Chuyển hướng đến trang Home.php
         header("Location: ../Home/Home.php");
@@ -61,7 +62,7 @@ if (isset($_POST['login']) && $_POST['login']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="http://localhost/DALN/Login/Login.css">
     <link rel="stylesheet" href="http://localhost/DALN/fontawesome-free-6.4.2-web/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     

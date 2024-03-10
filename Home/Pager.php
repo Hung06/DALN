@@ -3,7 +3,7 @@ class Pager {
     public static function getLinks($currentPage, $totalPages) {
         $links = '';
 
-        for ($i = 1; $i <= $totalPages; $i++) {
+        for ($i = 1; $i < $totalPages; $i++) {
             if ($i == $currentPage) {
                 $links .= '<span class="active">' . $i . '</span>';
             } else {
@@ -13,5 +13,6 @@ class Pager {
 
         return $links;
     }
+    
 }
 ?>

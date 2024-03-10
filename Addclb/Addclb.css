@@ -9,21 +9,48 @@
     width: 70%;
     display: flex;
     font-size: 30px;
-    height: 80%;
     margin: 70px 15%;
 }
 input ,select {
     width: 400px;
     height: 60px;
+    border-radius: 10px;
+    border: 1px solid black;
 }
 textarea{
-    height: 100px;
+    height: 200px;
+    border-radius: 10px;
+    border: 1px solid black;
 }
 .addbtn{
-    background-color: var(--cam);
+    background-color: white;
     width: 300px;
     height: 60  px;
+    color: black;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.addbtn:hover{
+    background-color: var(--cam);
+    color: white;
 }
 .sb-img{
     height: 80px;
+    border: none;
+}
+.thembtn{
+    background-color: white;
+    color: black;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+.thembtn:hover{
+    background-color: var(--cam);
+    color: white;
+}
+.action-title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }

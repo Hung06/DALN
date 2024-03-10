@@ -7,57 +7,173 @@ session_start();
 // Instantiate the Database class
 $db = new Database();
 
-// Kiểm tra nếu có sự kiện submit từ form
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Kiểm tra xem form đã được điền đầy đủ thông tin chưa 
-    if (!empty($_POST['ClubName']) && !empty($_POST['Description']) && !empty($_POST['MSV'])) {
-        // Lấy thông tin từ form
-        $clubName = $_POST['ClubName'];
-        $description = $_POST['Description'];
-        $msv_chu_nhiem = $_POST['MSV']; // Lấy MSV chủ nhiệm từ biểu mẫu
-        
-        // Lấy số lượng thành viên từ input có id là "count"
-        $numberOfMSVs = $_POST['count'];
-
-
-        // Lấy tên tệp Avata và Background
-        $avataName = $_FILES['Avata']['name'];
-        $backgroundName = $_FILES['Background']['name'];
-
-        // Thư mục lưu trữ avata và background
-        $uploadDir = '../img/';
-
-        // Di chuyển tệp Avata và Background vào thư mục lưu trữ
-        $avataPath = $uploadDir . $avataName;
-        $backgroundPath = $uploadDir . $backgroundName;
-
-        // Di chuyển tệp Avata và Background từ vị trí tạm thời vào thư mục lưu trữ
-        move_uploaded_file($_FILES['Avata']['tmp_name'], $avataPath);
-        move_uploaded_file($_FILES['Background']['tmp_name'], $backgroundPath);
-
-        // Kiểm tra xem file avata và background đã được tải lên thành công hay không
-        if (file_exists($avataPath) && file_exists($backgroundPath)) {
-            // Tạo truy vấn SQL để thêm câu lạc bộ vào cơ sở dữ liệu
-            $query = "INSERT INTO clubs (ClubName, Description, Members, Avata, Background, MSV) VALUES ('$clubName', '$description', '$numberOfMSVs', '$avataName', '$backgroundName', '$msv_chu_nhiem')";
+// Initialize message variable
+$message = "";
+if($_SESSION['Role'] == 'admin'){
+    // Kiểm tra nếu có sự kiện submit từ form
+    if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+        // Kiểm tra xem form đã được điền đầy đủ thông tin chưa 
+        if (!empty($_POST['ClubName']) && !empty($_POST['Description']) && !empty($_POST['MSV'])) {
+            // Lấy thông tin từ form
+            $clubName = $_POST['ClubName'];
+            $description = $_POST['Description'];
+            $msv_chu_nhiem = $_POST['MSV']; // Lấy MSV chủ nhiệm từ biểu mẫu
             
-            // Thực thi truy vấn
-            $result = $db->insert($query);
+            // Lấy số lượng thành viên từ input có id là "count"
+            $numberOfMSVs = $_POST['count'];
+            $query_check_role = "SELECT Role FROM user WHERE MSV = '$msv_chu_nhiem'";
+            $result_check_role = $db->select($query_check_role);
+            if ($result_check_role) {
+                $row = $result_check_role->fetch_assoc();
+                $msv_role = $row['Role'];
 
-            // Kiểm tra kết quả thêm câu lạc bộ
-            if ($result) {
-                $message = "Thêm thành công";
+                if ($msv_role != 'admin' && $msv_role != 'CLB') {
+                    // Sửa vai trò của MSV thành CLB
+                    $query_update_role = "UPDATE user SET Role = 'CLB' WHERE MSV = '$msv_chu_nhiem'";
+                    $result_update_role = $db->update($query_update_role);
+                    }
+                }
+            // Kiểm tra xem số lượng thành viên có ít nhất 4 không
+            if ($numberOfMSVs < 4) {
+                $message = "Số lượng thành viên phải ít nhất là 4";
             } else {
-                echo "Đã xảy ra lỗi khi thêm câu lạc bộ!";
+                // Lấy tên tệp Avata và Background
+                $avataName = $_FILES['Avata']['name'];
+                $backgroundName = $_FILES['Background']['name'];
+
+                // Thư mục lưu trữ avata và background
+                $uploadDir = '../img/';
+
+                // Di chuyển tệp Avata và Background vào thư mục lưu trữ
+                $avataPath = $uploadDir . $avataName;
+                $backgroundPath = $uploadDir . $backgroundName;
+
+                // Di chuyển tệp Avata và Background từ vị trí tạm thời vào thư mục lưu trữ
+                move_uploaded_file($_FILES['Avata']['tmp_name'], $avataPath);
+                move_uploaded_file($_FILES['Background']['tmp_name'], $backgroundPath);
+
+                // Kiểm tra xem file avata và background đã được tải lên thành công hay không
+                if (file_exists($avataPath) && file_exists($backgroundPath)) {
+                    // Tạo truy vấn SQL để thêm câu lạc bộ vào cơ sở dữ liệu
+                    $query = "INSERT INTO clubs (ClubName, Description, Members, Avata, Background, MSV,Status) VALUES ('$clubName', '$description', '$numberOfMSVs', '$avataName', '$backgroundName', '$msv_chu_nhiem','Thành công')";
+                    
+                    // Thực thi truy vấn
+                    $result = $db->insert($query);
+
+                    // Kiểm tra kết quả thêm câu lạc bộ
+                    if ($result) {
+                        $clubID = $db->link->insert_id;
+                    
+                        // Lấy danh sách các MSV từ input có id là "selectedMSVsInput"
+                        if (isset($_POST['selectedMSVsInput'])) {
+                            $selectedMSVsInput = $_POST['selectedMSVsInput'];
+                            // Chia chuỗi các MSV thành một mảng
+                            $selectedMSVs = explode(', ', $selectedMSVsInput);
+                    
+                            // Thêm các MSV vào bảng clubmembers
+                            foreach ($selectedMSVs as $msv) {
+                                // Kiểm tra xem MSV có tồn tại trong cơ sở dữ liệu không trước khi thêm
+                                $query_check_msv = "SELECT MSV FROM user WHERE MSV = '$msv'";
+                                $result_check_msv = $db->select($query_check_msv);
+                                if ($result_check_msv && $result_check_msv->num_rows > 0) {
+                                    // Thực hiện truy vấn SQL để thêm MSV vào bảng clubmembers
+                                    $query_member = "INSERT INTO clubmembers (MSV, ClubID, Status) VALUES ('$msv', '$clubID', 'Thành công')";
+                                    $result_member = $db->insert($query_member);
+                                    if (!$result_member) {
+                                        $message = "Đã xảy ra lỗi khi thêm thành viên vào câu lạc bộ!";
+                                        break; // Thoát vòng lặp nếu có lỗi xảy ra
+                                    }
+                                } else {
+                                    $message = "MSV $msv không tồn tại trong cơ sở dữ liệu!";
+                                }
+                            }
+                        }
+                    }
+                     else {
+                        $message = "Đã xảy ra lỗi khi thêm câu lạc bộ!";
+                    }
+                } else {
+                    $message = "Đã xảy ra lỗi khi tải lên file avata hoặc background!";
+                }
             }
         } else {
-            echo "Đã xảy ra lỗi khi tải lên file avata hoặc background!";
+            $message = "Vui lòng điền đầy đủ thông tin!";
         }
-    } else {
-        echo "Vui lòng điền đầy đủ thông tin!";
+    }
+}elseif ($_SESSION['Role'] == 'sv' || $_SESSION['Role'] == 'CLB') {
+    // Kiểm tra nếu có sự kiện submit từ form
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Kiểm tra xem form đã được điền đầy đủ thông tin chưa 
+        if (!empty($_POST['ClubName']) && !empty($_POST['Description']) && !empty($_POST['MSV'])) {
+            // Lấy thông tin từ form
+            $clubName = $_POST['ClubName'];
+            $description = $_POST['Description'];
+            $msv_chu_nhiem = $_POST['MSV']; // Lấy MSV chủ nhiệm từ biểu mẫu
+            
+            // Lấy số lượng thành viên từ input có id là "count"
+            $numberOfMSVs = $_POST['count'];
+
+            // Kiểm tra xem số lượng thành viên có ít nhất 4 không
+            if ($numberOfMSVs < 4) {
+                $message = "Số lượng thành viên phải ít nhất là 4";
+            } else {
+                // Lấy tên tệp Avata và Background
+                $avataName = $_FILES['Avata']['name'];
+                $backgroundName = $_FILES['Background']['name'];
+
+                // Thư mục lưu trữ avata và background
+                $uploadDir = '../img/';
+
+                // Di chuyển tệp Avata và Background vào thư mục lưu trữ
+                $avataPath = $uploadDir . $avataName;
+                $backgroundPath = $uploadDir . $backgroundName;
+
+                // Di chuyển tệp Avata và Background từ vị trí tạm thời vào thư mục lưu trữ
+                move_uploaded_file($_FILES['Avata']['tmp_name'], $avataPath);
+                move_uploaded_file($_FILES['Background']['tmp_name'], $backgroundPath);
+
+                // Kiểm tra xem file avata và background đã được tải lên thành công hay không
+                if (file_exists($avataPath) && file_exists($backgroundPath)) {
+                    // Tạo truy vấn SQL để thêm câu lạc bộ vào cơ sở dữ liệu
+                    $query = "INSERT INTO clubs (ClubName, Description, Members, Avata, Background, MSV, Status) VALUES ('$clubName', '$description', '$numberOfMSVs', '$avataName', '$backgroundName', '$msv_chu_nhiem', 'Chờ duyệt')";
+                    
+                    // Thực thi truy vấn
+                    $result = $db->insert($query);
+                    if ($result) {
+                        $clubID = $db->link->insert_id;
+
+                        // Lấy danh sách các MSV từ input có id là "selectedMSVsInput"
+                        if (isset($_POST['selectedMSVsInput'])) {
+                            $selectedMSVsInput = $_POST['selectedMSVsInput'];
+
+                            // Chia chuỗi các MSV thành một mảng
+                            $selectedMSVs = explode(', ', $selectedMSVsInput);
+
+                            // Thêm các MSV vào bảng clubmembers
+                            foreach ($selectedMSVs as $msv) {
+                                // Thực hiện truy vấn SQL để thêm MSV vào bảng clubmembers
+                                $query_member = "INSERT INTO clubmembers (MSV, ClubID, Status) VALUES ('$msv', '$clubID', 'Chờ duyệt')";
+                                $result_member = $db->insert($query_member);
+                                if (!$result_member) {
+                                    $message = "Đã xảy ra lỗi khi thêm thành viên vào câu lạc bộ!";
+                                    break; // Thoát vòng lặp nếu có lỗi xảy ra
+                                }
+                            }
+                        }
+                        $message = "Đăng ký thành công";
+                    }else {
+                        $message = "Đã xảy ra lỗi khi gửi yêu cầu.";
+                    }
+                } else {
+                    $message = "Đã xảy ra lỗi khi tải lên file avata hoặc background!";
+                }
+            }
+        } else {
+            $message = "Vui lòng điền đầy đủ thông tin!";
+        }
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="wrapper wrapper-login flexs">
         <div class="left-sidebar">
             <div class="sidebar-menu">
-                <a href="#" class="menu-item">
+                <a href="http://localhost/DALN//Home/Home.php" class="menu-item">
                     <i class="fa-solid fa-house"></i>
                     <span>Trang chủ</span>
                 </a>
@@ -96,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <i class="fa-solid fa-star"></i>
                     <span>Sự kiện</span>
                 </a>
-                <a href="" class="menu-item">
+                <a href="#" class="menu-item">
                     <i class="fa-solid fa-users"></i>
                     <span>Tạo CLB</span>
                 </a>
@@ -141,12 +257,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
             <div class="content-bottom ">
+                <div class="action-title">
+                    <h1>Tạo câu lạc bộ</h1>
+                </div>
                 <form action="" class="addclb" method="POST" enctype="multipart/form-data">
                     <label for="ClubName">Tên Câu lạc bộ:</label>
                     <input type="text" name="ClubName" id="ClubName" required>
                     <label for="ClubName">MSV chủ nhiệm câu lạc bộ</label>
                     <input type="text" name="MSV" id="MSV" required>
-                    <label for="MSV">Thành viên(MSV)</label>
+                    <label for="MSV">Thành viên ban đầu</label>
                     <input type="text" id="MSVInput" list="MSVList">
                     <datalist id="MSVList">
                         <?php
@@ -160,12 +279,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                         ?>
                     </datalist>
-                    <button style="width: 100px" type="button" onclick="addSelectedOption()">Thêm</button>
+                    <button class="thembtn" style="width: 100px" type="button" onclick="addSelectedOption()">Thêm</button>
 
                     <!-- Div để hiển thị tất cả các MSV đã chọn -->
                     <div>
-                        <p id="selectedCount">Số lượng MSV đã chọn: <input id="count" name="count"></input></p>
-                        <ul id="selectedMSVs"></ul>
+                        <!-- Thêm input ẩn để lưu trữ danh sách các MSV đã chọn -->
+                        <input type="hidden" id="selectedMSVsInput" name="selectedMSVsInput">
+                        <p id="selectedCount">Số lượng MSV đã chọn: <input style="width: 50px;text-align: center;" id="count" name="count"></p>
+                        <div id="selectedMSVsContainer"></div>
                     </div>
                     <label for="Description">Mô tả:</label>
                     <textarea name="Description" id="Description" cols="30" rows="5" required></textarea>
@@ -176,7 +297,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="Background">Background:</label>
                     <input class="sb-img" type="file" name="Background" id="Background" accept="image/*" required>
             
-                    <button class="addbtn" type="submit">Tạo</button>
+                    
+                    <?php
+                    if ($_SESSION['Role'] == 'sv' || $_SESSION['Role'] == 'CLB') {
+                            echo '<button class="addbtn" type="submit" id="dkclb" >Đăng ký</button>';
+                        } elseif ($_SESSION['Role'] == 'admin') {
+                            echo '<button class="addbtn" type="submit" id="submitButton" >Tạo</button>';
+                        }
+                    ?>
                 </form>
             </div>               
             <input type="hidden" id="userRole" value="<?php echo $_SESSION['Role']; ?>">
