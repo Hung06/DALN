@@ -360,7 +360,7 @@ if(isset($_GET['ClubID'])) {
                         echo '              </div>';
                         echo '          </div>';
                         echo '      </div>';
-                        echo '      <div class="menuright"></div>';
+                        echo '<div class="menuright">' . $row['Description'] . '</div>';
                         echo '  </div>';
                         echo '</div>';
                     }

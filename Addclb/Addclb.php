@@ -212,7 +212,7 @@ if($_SESSION['Role'] == 'admin'){
                     <i class="fa-solid fa-star"></i>
                     <span>Sự kiện</span>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="#" class="menu-item active">
                     <i class="fa-solid fa-users"></i>
                     <span>Tạo CLB</span>
                 </a>

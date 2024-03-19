@@ -7,13 +7,19 @@ session_start();
 
 // Khởi tạo đối tượng Database
 $db = new Database();
-
 // Truy vấn SQL để lấy thông tin về các sự kiện từ bảng events và tên của CLB từ bảng clubs thông qua ClubID
-$sql = "SELECT events.*, clubs.ClubName,clubs.Avata FROM events INNER JOIN clubs ON events.ClubID = clubs.ClubID";
+$sql = "SELECT events.*, clubs.ClubName, clubs.Avata FROM events INNER JOIN clubs ON events.ClubID = clubs.ClubID ORDER BY events.EventID DESC";
 $result = $db->select($sql);
+if (isset($_SESSION['message'])) {
+    // Hiển thị thông báo
+    echo '<script>alert("' . $_SESSION['message'] . '");</script>';
+    // Sau khi hiển thị thông báo, xóa nó khỏi session để không hiển thị lại
+    unset($_SESSION['message']);
+}
 
 // Hiển thị HTML
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +48,26 @@ $result = $db->select($sql);
                 showMoreButton.innerText = 'Thu gọn';
             }
         }
-</script>
+        document.addEventListener('DOMContentLoaded', function() {
+    var buttons = document.querySelectorAll('.TV');
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var eventID = this.getAttribute('data-eventid');
+            var DSTV = document.querySelector('.DSTV.event-' + eventID);
+            
+            // Kiểm tra xem DSTV đã hiển thị hay chưa
+            if (DSTV.style.display === 'block') {
+                DSTV.style.display = 'none'; // Nếu đã hiển thị, chuyển sang ẩn đi
+            } else {
+                DSTV.style.display = 'block'; // Nếu chưa hiển thị, hiển thị
+            }
+        });
+    });
+});
 
+
+
+</script>
 <body>
     <div class="wrapper wrapper-login flexs">
         <div class="left-sidebar">
@@ -52,7 +76,7 @@ $result = $db->select($sql);
                     <i class="fa-solid fa-house"></i>
                     <span>Trang chủ</span>
                 </a>
-                <a href="" class="menu-item">
+                <a href="" class="menu-item active">
                     <i class="fa-solid fa-star"></i>
                     <span>Sự kiện</span>
                 </a>
@@ -101,13 +125,14 @@ $result = $db->select($sql);
                 </div>
             </div>
             <div class="content-bottom">
-                <?php
+            <?php
                 // Kiểm tra xem có dữ liệu từ truy vấn không
                 if ($result->num_rows > 0) {
                     // Duyệt qua từng hàng dữ liệu và hiển thị thông tin tương ứng
                     while ($row = $result->fetch_assoc()) {
                         echo '<div class="event-title">';
                         echo '    <div class="event-club">';
+                        // Hiển thị thông tin sự kiện
                         echo '        <div class="club-img">';
                         echo '            <img src="http://localhost/DALN/img/'. $row["Avata"] . '" alt="">';
                         echo '        </div>';
@@ -116,8 +141,11 @@ $result = $db->select($sql);
                         echo '            <h3>' . $row["Time"] . '</h3>';
                         echo '        </div>';
                         echo '        <div class="dkevent">';
+                        // Nút "Xem thành viên" với class đặc biệt để phân biệt giữa các sự kiện
+                        echo '<button class="TV" data-eventid="' . $row["EventID"] . '">Xem thành viên</button>';
+                        // Kiểm tra trạng thái của sự kiện để hiển thị nút đăng ký hoặc thông báo hết hạn
                         if ($row["Status"] == "Mở đăng ký") {
-                            echo '            <button class="dkevent-btn">Đăng ký</button>';
+                            echo '<a href="Register.php?msv=' . $_SESSION['MSV'] . '&eventID=' . $row["EventID"] . '" class="dkevent-btn">Đăng ký</a>';
                         } else {
                             echo '            <span> <button class="dkevent-btn">Hết hạn</button></span>';
                         }
@@ -130,6 +158,29 @@ $result = $db->select($sql);
                         echo '    <div id="image-container" ondrop="drop(event)" ondragover="allowDrop(event)">';
                         echo '        <img src="http://localhost/DALN/img/'. $row["Image"] . '" alt="" onload="checkImageOrientation(this)">';
                         echo '    </div>';
+                        echo '        <div class="DSTV event-' . $row['EventID'] . '">';
+                        // Truy vấn SQL để lấy danh sách sinh viên tham gia sự kiện
+                        $eventID = $row['EventID'];
+                        $sql_students = "SELECT user.MSV, user.Name, user.Mail FROM eventmembers INNER JOIN user ON eventmembers.MSV = user.MSV WHERE eventmembers.EventID = $eventID";
+                        $result_students = $db->select($sql_students);
+                        // Kiểm tra xem có sinh viên nào tham gia không
+                        if ($result_students->num_rows > 0) {
+                            // Hiển thị bảng danh sách sinh viên
+                            echo '<table class="TVTB">';
+                            echo '<tr><th>MSV</th><th>Name</th><th>Email</th></tr>';
+                            // Duyệt qua từng sinh viên và hiển thị thông tin của họ trong bảng
+                            while ($row_student = $result_students->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td>' . $row_student['MSV'] . '</td>';
+                                echo '<td>' . $row_student['Name'] . '</td>';
+                                echo '<td>' . $row_student['Mail'] . '</td>';
+                                echo '</tr>';
+                            }
+                            echo '</table>';
+                        } else {
+                            echo '<p>Không có sinh viên tham gia sự kiện này.</p>';
+                        }
+                        echo '    </div>';
                         echo '</div>';
                     }
                 } else {
@@ -140,4 +191,5 @@ $result = $db->select($sql);
         </div>
     </div>
 </body>
+
 </html>

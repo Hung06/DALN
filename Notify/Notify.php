@@ -68,7 +68,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
                     <i class="fa-solid fa-school"></i>
                     <span>Tạo sự kiện</span>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="#" class="menu-item active">
                     <i class="fa-solid fa-bell"></i>
                     <span>Thông báo</span>
                 </a>

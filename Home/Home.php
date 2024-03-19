@@ -48,7 +48,7 @@ $totalPages = ceil($totalItems / $itemsPerPage);
     <div class="wrapper wrapper-login flexs">
         <div class="left-sidebar">
             <div class="sidebar-menu">
-                <a href="#" class="menu-item">
+                <a href="#" class="menu-item active">
                     <i class="fa-solid fa-house"></i>
                     <span>Trang chủ</span>
                 </a>
@@ -109,14 +109,15 @@ $totalPages = ceil($totalItems / $itemsPerPage);
                         echo '        <img src="http://localhost/DALN/img/' . $row["Avata"] . '" alt="">';
                         echo '    </a>';
                         echo '    <span>' . $row["ClubName"] . '</span>';
-            
+
                         // Kiểm tra role và hiển thị nút phù hợp
                         if ($_SESSION['Role'] == 'sv' || $_SESSION['Role'] == 'CLB') {
-                            echo '    <button class="DK">Đăng ký</button>';
+                            // Tạo thẻ <a> để gửi ClubID
+                            echo '<a href="Register.php?ClubID=' . $row["ClubID"] . '" class="DK">Đăng ký</a>';
                         } elseif ($_SESSION['Role'] == 'admin') {
                             echo '<a href="Delete.php?clubID=' . $row["ClubID"] . '&MSV=' . $row["MSV"] . '" class="DK">Xóa</a>';
                         }
-            
+
                         echo '</div>';
                     }
                 } 

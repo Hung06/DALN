@@ -1,6 +1,7 @@
 .content-bottom{
     overflow:auto;
     height: 855px;
+    position: relative;
 }
 .event-title{
     width: 80%;
@@ -11,6 +12,7 @@
     border-radius: 20px;
     border: 1px solid darkblue;
     overflow: hidden;
+    position: relative;
 }
 .event-club{
     display: flex;
@@ -29,7 +31,9 @@
 }
 .dkevent{
     position: absolute;
-    left: 1100px;
+    left: 900px;
+    display: flex;
+    top: 80px;
 }
 .dkevent-btn{
     width: 150px;
@@ -38,6 +42,11 @@
     background-color: #223771;
     color: white;
     font-size: 20px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 .dkevent-btn:hover{
     background-color: #F8843D;
@@ -69,5 +78,43 @@
     display: flex;
     justify-content: center;
     width: 100%;
+}
+.TV{
+    width: 200px;
+    height: 60px;
+    border-radius: 25px;
+    background-color: #223771;
+    color: white;
+    font-size: 20px;
+}
+.TV:hover{
+    background-color: #F8843D;
+    color: white;
+}
+.DSTV{
+    width: 800px;
+    height: auto;
+    background-color:#223771;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    color: white;
+    display: none;
+}
+.TVTB{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    border-radius: 10px;
+    color: white;
+}
+.TVTB tr{
+    height: 50px;
+    display: table-row;
+}
+.TVTB th ,.TVTB td {
+    padding: 8px;
 }
 

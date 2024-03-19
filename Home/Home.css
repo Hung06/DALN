@@ -105,6 +105,7 @@ body{
     cursor: pointer;
     border: 0px solid var(--dask-blue);
     border-radius: 0 0 10px 10px;
+    z-index: 2;
     margin: 20px 0;
 }
 .user-drop:hover{
@@ -182,4 +183,7 @@ body{
 }
 .DK:hover{
     background-color:var(--cam) ;
+}
+.active{
+    color: var(--cam);
 }

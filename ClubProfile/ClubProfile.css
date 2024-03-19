@@ -104,6 +104,13 @@
 }
 .menuright{
     flex: 30%;
+    margin-top: 122px;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 20px;
 }
 .menuleft-button button{
     width: 120px;
@@ -285,4 +292,7 @@ textarea{
 .Pass:hover{
     background-color: #F8843D;
     color: white;
+}
+.menuleft-button button:active {
+    background-color: #F8843D; /* Màu nền khi nút được nhấp */
 }
